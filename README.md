@@ -30,6 +30,7 @@ A web based guessing game where players identify **Tom Clancy’s Rainbow Six Si
 └── /blueprints/
     ├── /color/             # Colored blueprint images
     └── /bluewhite/         # Blue/white blueprint images
+```
 
 ---
 
