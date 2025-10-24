@@ -18,17 +18,18 @@ A web based guessing game where players identify **Tom Clancy’s Rainbow Six Si
 
 ## Project Structure
 
+```text
 /
 ├── index.html              # Main HTML file
 ├── /scripts/
-│   └── game.js            # Game logic and functionality
+│   └── game.js             # Game logic and functionality
 ├── /styles/
-│   └── style.css          # All styling
+│   └── style.css           # All styling
 ├── /data/
-│   └── maps.json          # Map database with image filenames
+│   └── maps.json           # Map database with image filenames
 └── /blueprints/
-    ├── /color/            # Colored blueprint images
-    └── /bluewhite/        # Blue/white blueprint images
+    ├── /color/             # Colored blueprint images
+    └── /bluewhite/         # Blue/white blueprint images
 
 ---
 
