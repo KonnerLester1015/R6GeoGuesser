@@ -59,13 +59,31 @@ oregon_rework_1.jpg
 
 **Supported Maps (31 total some Reworks):**
 
-CLUBHOUSE, BANK, BANK REWORK, KAFE, CHALET, CHALET REWORK,  
-BORDER, STADIUM BRAVO, STADIUM ALPHA, LAIR, NIGHTHAVEN LABS,  
-EMERALD PLAINS, COASTLINE, CONSULATE, CONSULATE REWORK,  
-FAVELA, FORTRESS, HEREFORD BASE, HOUSE, KANAL,  
-OREGON, OREGON REWORK, OUTBACK, OUTBACK REWORK,  
-PRESIDENTIAL PLANE, SKYSCRAPER, SKYSCRAPER REWORK,  
-THEME PARK, TOWER, VILLA, YACHT  
+
+- Clubhouse  
+- Bank / Bank Rework  
+- Kafe  
+- Chalet / Chalet Rework  
+- Border  
+- Stadium Bravo / Stadium Alpha  
+- Lair  
+- Nighthaven Labs  
+- Emerald Plains  
+- Coastline  
+- Consulate / Consulate Rework  
+- Favela  
+- Fortress  
+- Hereford Base  
+- House  
+- Kanal  
+- Oregon / Oregon Rework  
+- Outback / Outback Rework  
+- Presidential Plane  
+- Skyscraper / Skyscraper Rework  
+- Theme Park  
+- Tower  
+- Villa  
+- Yacht
 
 ---
 
