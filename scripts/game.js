@@ -174,15 +174,54 @@ function loadMapImage() {
     const floors = gameState.currentMap[gameState.mode];
     const imagePath = `blueprints/${gameState.mode}/${floors[gameState.currentFloorIndex]}`;
     
+    // Show the image container
+    mapImage.style.display = 'block';
+    
+    // Set the image source
     mapImage.src = imagePath;
     currentFloorEl.textContent = gameState.currentFloorIndex + 1;
     totalFloorsEl.textContent = floors.length;
     
+    // Handle successful load
+    mapImage.onload = function() {
+        this.style.opacity = '1';
+    };
+    
     // Handle image load error (show placeholder)
     mapImage.onerror = function() {
+        console.warn(`Image not found: ${imagePath}`);
         this.onerror = null;
-        this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%230f0f1e" width="800" height="600"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial" font-size="24" fill="%23666" text-anchor="middle" dy=".3em"%3EMap Blueprint%3C/text%3E%3C/svg%3E';
+        // Create a more visible placeholder
+        this.style.display = 'none';
+        showPlaceholder();
     };
+}
+
+// Show placeholder when image is missing
+function showPlaceholder() {
+    const placeholder = document.createElement('div');
+    placeholder.className = 'image-placeholder';
+    placeholder.innerHTML = `
+        <div style="text-align: center; color: #666; padding: 60px 20px;">
+            <div style="font-size: 80px; margin-bottom: 20px;">🗺️</div>
+            <div style="font-size: 24px; margin-bottom: 10px;">Map Blueprint</div>
+            <div style="font-size: 14px; margin-bottom: 20px;">Floor ${gameState.currentFloorIndex + 1} of ${gameState.currentMap[gameState.mode].length}</div>
+            <div style="font-size: 12px; color: #444; margin-top: 20px;">
+                Mode: ${gameState.mode === 'color' ? 'Colored Blueprint' : 'Blue & White Blueprint'}
+            </div>
+            <div style="font-size: 11px; color: #333; margin-top: 10px; font-family: monospace;">
+                Expected: blueprints/${gameState.mode}/${gameState.currentMap[gameState.mode][gameState.currentFloorIndex]}
+            </div>
+        </div>
+    `;
+    
+    // Remove any existing placeholder
+    const existingPlaceholder = imageContainer.querySelector('.image-placeholder');
+    if (existingPlaceholder) {
+        existingPlaceholder.remove();
+    }
+    
+    imageContainer.appendChild(placeholder);
 }
 
 // Handle input
