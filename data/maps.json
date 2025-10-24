@@ -1,0 +1,159 @@
+{
+  "maps": [
+    {
+      "name": "CLUBHOUSE",
+      "color": ["clubhouse_1.jpg", "clubhouse_2.jpg", "clubhouse_3.jpg"],
+      "bluewhite": ["clubhouse_1.jpg", "clubhouse_2.jpg", "clubhouse_3.jpg"]
+    },
+    {
+      "name": "BANK",
+      "color": ["bank_1.jpg", "bank_2.jpg", "bank_3.jpg"],
+      "bluewhite": ["bank_1.jpg", "bank_2.jpg", "bank_3.jpg"]
+    },
+    {
+      "name": "BANK REWORK",
+      "color": [],
+      "bluewhite": ["bank_rework_1.jpg", "bank_rework_2.jpg"]
+    },
+    {
+      "name": "KAFE",
+      "color": ["kafe_1.jpg", "kafe_2.jpg", "kafe_3.jpg"],
+      "bluewhite": ["kafe_1.jpg", "kafe_2.jpg", "kafe_3.jpg"]
+    },
+    {
+      "name": "CHALET",
+      "color": ["chalet_1.jpg", "chalet_2.jpg", "chalet_3.jpg"],
+      "bluewhite": ["chalet_1.jpg", "chalet_2.jpg", "chalet_3.jpg"]
+    },
+    {
+      "name": "CHALET REWORK",
+      "color": [],
+      "bluewhite": ["chalet_rework_1.jpg", "chalet_rework_2.jpg"]
+    },
+    {
+      "name": "BORDER",
+      "color": ["border_1.jpg", "border_2.jpg", "border_3.jpg"],
+      "bluewhite": ["border_1.jpg", "border_2.jpg", "border_3.jpg"]
+    },
+    {
+      "name": "STADIUM BRAVO",
+      "color": ["stadium_bravo_1.jpg", "stadium_bravo_2.jpg"],
+      "bluewhite": []
+    },
+    {
+      "name": "STADIUM ALPHA",
+      "color": ["stadium_alpha_1.jpg", "stadium_alpha_2.jpg"],
+      "bluewhite": []
+    },
+    {
+      "name": "LAIR",
+      "color": ["lair_1.jpg", "lair_2.jpg"],
+      "bluewhite": []
+    },
+    {
+      "name": "NIGHTHAVEN LABS",
+      "color": ["nighthaven_1.jpg", "nighthaven_2.jpg"],
+      "bluewhite": ["nighthaven_1.jpg", "nighthaven_2.jpg"]
+    },
+    {
+      "name": "EMERALD PLAINS",
+      "color": ["emerald_1.jpg", "emerald_2.jpg"],
+      "bluewhite": []
+    },
+    {
+      "name": "COASTLINE",
+      "color": ["coastline_1.jpg", "coastline_2.jpg", "coastline_3.jpg"],
+      "bluewhite": ["coastline_1.jpg", "coastline_2.jpg"]
+    },
+    {
+      "name": "CONSULATE",
+      "color": ["consulate_1.jpg", "consulate_2.jpg", "consulate_3.jpg"],
+      "bluewhite": ["consulate_1.jpg", "consulate_2.jpg"]
+    },
+    {
+      "name": "CONSULATE REWORK",
+      "color": [],
+      "bluewhite": ["consulate_rework_1.jpg", "consulate_rework_2.jpg"]
+    },
+    {
+      "name": "FAVELA",
+      "color": ["favela_1.jpg", "favela_2.jpg", "favela_3.jpg"],
+      "bluewhite": ["favela_1.jpg", "favela_2.jpg"]
+    },
+    {
+      "name": "FORTRESS",
+      "color": ["fortress_1.jpg", "fortress_2.jpg"],
+      "bluewhite": ["fortress_1.jpg", "fortress_2.jpg"]
+    },
+    {
+      "name": "HEREFORD BASE",
+      "color": ["hereford_1.jpg", "hereford_2.jpg"],
+      "bluewhite": ["hereford_1.jpg", "hereford_2.jpg"]
+    },
+    {
+      "name": "HOUSE",
+      "color": ["house_1.jpg", "house_2.jpg", "house_3.jpg"],
+      "bluewhite": ["house_1.jpg", "house_2.jpg"]
+    },
+    {
+      "name": "KANAL",
+      "color": ["kanal_1.jpg", "kanal_2.jpg", "kanal_3.jpg"],
+      "bluewhite": ["kanal_1.jpg", "kanal_2.jpg"]
+    },
+    {
+      "name": "OREGON",
+      "color": ["oregon_1.jpg", "oregon_2.jpg", "oregon_3.jpg"],
+      "bluewhite": ["oregon_1.jpg", "oregon_2.jpg"]
+    },
+    {
+      "name": "OREGON REWORK",
+      "color": [],
+      "bluewhite": ["oregon_rework_1.jpg", "oregon_rework_2.jpg"]
+    },
+    {
+      "name": "OUTBACK",
+      "color": ["outback_1.jpg", "outback_2.jpg"],
+      "bluewhite": ["outback_1.jpg", "outback_2.jpg"]
+    },
+    {
+      "name": "OUTBACK REWORK",
+      "color": [],
+      "bluewhite": ["outback_rework_1.jpg", "outback_rework_2.jpg"]
+    },
+    {
+      "name": "PRESIDENTIAL PLANE",
+      "color": ["plane_1.jpg", "plane_2.jpg"],
+      "bluewhite": ["plane_1.jpg", "plane_2.jpg"]
+    },
+    {
+      "name": "SKYSCRAPER",
+      "color": ["skyscraper_1.jpg", "skyscraper_2.jpg"],
+      "bluewhite": ["skyscraper_1.jpg", "skyscraper_2.jpg"]
+    },
+    {
+      "name": "SKYSCRAPER REWORK",
+      "color": [],
+      "bluewhite": ["skyscraper_rework_1.jpg", "skyscraper_rework_2.jpg"]
+    },
+    {
+      "name": "THEME PARK",
+      "color": ["themepark_1.jpg", "themepark_2.jpg", "themepark_3.jpg"],
+      "bluewhite": ["themepark_1.jpg", "themepark_2.jpg"]
+    },
+    {
+      "name": "TOWER",
+      "color": ["tower_1.jpg", "tower_2.jpg"],
+      "bluewhite": ["tower_1.jpg", "tower_2.jpg"]
+    },
+    {
+      "name": "VILLA",
+      "color": ["villa_1.jpg", "villa_2.jpg", "villa_3.jpg"],
+      "bluewhite": ["villa_1.jpg", "villa_2.jpg"]
+    },
+    {
+      "name": "YACHT",
+      "color": ["yacht_1.jpg", "yacht_2.jpg"],
+      "bluewhite": ["yacht_1.jpg", "yacht_2.jpg"]
+    }
+  ]
+}

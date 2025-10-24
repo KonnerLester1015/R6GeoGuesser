@@ -1,0 +1,337 @@
+// Game State
+let gameState = {
+    mode: null,
+    maps: [],
+    currentMap: null,
+    currentFloorIndex: 0,
+    correctGuesses: 0,
+    remainingMaps: 0,
+    usedMaps: [],
+    timer: 0,
+    timerInterval: null,
+    allMapNames: []
+};
+
+// DOM Elements
+const menuScreen = document.getElementById('menu-screen');
+const gameScreen = document.getElementById('game-screen');
+const gameoverScreen = document.getElementById('gameover-screen');
+const easyModeBtn = document.getElementById('easy-mode-btn');
+const hardModeBtn = document.getElementById('hard-mode-btn');
+const guessInput = document.getElementById('guess-input');
+const suggestionsDiv = document.getElementById('suggestions');
+const submitBtn = document.getElementById('submit-btn');
+const skipBtn = document.getElementById('skip-btn');
+const mapImage = document.getElementById('map-image');
+const imageContainer = document.getElementById('image-container');
+const mapsRemainingEl = document.getElementById('maps-remaining');
+const correctGuessesEl = document.getElementById('correct-guesses');
+const timerEl = document.getElementById('timer');
+const currentFloorEl = document.getElementById('current-floor');
+const totalFloorsEl = document.getElementById('total-floors');
+const playAgainBtn = document.getElementById('play-again-btn');
+const finalCorrectEl = document.getElementById('final-correct');
+const finalTimeEl = document.getElementById('final-time');
+
+// Load maps data
+async function loadMapsData() {
+    try {
+        const response = await fetch('data/maps.json');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error loading maps data:', error);
+        // Fallback data if JSON fails to load
+        return getFallbackData();
+    }
+}
+
+// Fallback data
+function getFallbackData() {
+    return {
+        maps: [
+            { name: "CLUBHOUSE", color: ["clubhouse_1.jpg", "clubhouse_2.jpg"], bluewhite: ["clubhouse_1.jpg", "clubhouse_2.jpg"] },
+            { name: "BANK", color: ["bank_1.jpg", "bank_2.jpg"], bluewhite: ["bank_1.jpg", "bank_2.jpg"] },
+            { name: "BANK REWORK", color: [], bluewhite: ["bank_rework_1.jpg"] },
+            { name: "KAFE", color: ["kafe_1.jpg", "kafe_2.jpg"], bluewhite: ["kafe_1.jpg", "kafe_2.jpg"] },
+            { name: "CHALET", color: ["chalet_1.jpg", "chalet_2.jpg"], bluewhite: ["chalet_1.jpg", "chalet_2.jpg"] },
+            { name: "CHALET REWORK", color: [], bluewhite: ["chalet_rework_1.jpg"] },
+            { name: "BORDER", color: ["border_1.jpg", "border_2.jpg"], bluewhite: ["border_1.jpg", "border_2.jpg"] },
+            { name: "STADIUM BRAVO", color: ["stadium_bravo_1.jpg"], bluewhite: [] },
+            { name: "STADIUM ALPHA", color: ["stadium_alpha_1.jpg"], bluewhite: [] },
+            { name: "LAIR", color: ["lair_1.jpg"], bluewhite: [] },
+            { name: "NIGHTHAVEN LABS", color: ["nighthaven_1.jpg"], bluewhite: ["nighthaven_1.jpg"] },
+            { name: "EMERALD PLAINS", color: ["emerald_1.jpg"], bluewhite: [] },
+            { name: "COASTLINE", color: ["coastline_1.jpg", "coastline_2.jpg"], bluewhite: ["coastline_1.jpg"] },
+            { name: "CONSULATE", color: ["consulate_1.jpg", "consulate_2.jpg"], bluewhite: ["consulate_1.jpg"] },
+            { name: "CONSULATE REWORK", color: [], bluewhite: ["consulate_rework_1.jpg"] },
+            { name: "FAVELA", color: ["favela_1.jpg", "favela_2.jpg"], bluewhite: ["favela_1.jpg"] },
+            { name: "FORTRESS", color: ["fortress_1.jpg"], bluewhite: ["fortress_1.jpg"] },
+            { name: "HEREFORD BASE", color: ["hereford_1.jpg"], bluewhite: ["hereford_1.jpg"] },
+            { name: "HOUSE", color: ["house_1.jpg", "house_2.jpg"], bluewhite: ["house_1.jpg"] },
+            { name: "KANAL", color: ["kanal_1.jpg", "kanal_2.jpg"], bluewhite: ["kanal_1.jpg"] },
+            { name: "OREGON", color: ["oregon_1.jpg", "oregon_2.jpg"], bluewhite: ["oregon_1.jpg"] },
+            { name: "OREGON REWORK", color: [], bluewhite: ["oregon_rework_1.jpg"] },
+            { name: "OUTBACK", color: ["outback_1.jpg"], bluewhite: ["outback_1.jpg"] },
+            { name: "OUTBACK REWORK", color: [], bluewhite: ["outback_rework_1.jpg"] },
+            { name: "PRESIDENTIAL PLANE", color: ["plane_1.jpg"], bluewhite: ["plane_1.jpg"] },
+            { name: "SKYSCRAPER", color: ["skyscraper_1.jpg"], bluewhite: ["skyscraper_1.jpg"] },
+            { name: "SKYSCRAPER REWORK", color: [], bluewhite: ["skyscraper_rework_1.jpg"] },
+            { name: "THEME PARK", color: ["themepark_1.jpg", "themepark_2.jpg"], bluewhite: ["themepark_1.jpg"] },
+            { name: "TOWER", color: ["tower_1.jpg"], bluewhite: ["tower_1.jpg"] },
+            { name: "VILLA", color: ["villa_1.jpg", "villa_2.jpg"], bluewhite: ["villa_1.jpg"] },
+            { name: "YACHT", color: ["yacht_1.jpg"], bluewhite: ["yacht_1.jpg"] }
+        ]
+    };
+}
+
+// Initialize game
+async function init() {
+    const data = await loadMapsData();
+    gameState.allMapNames = data.maps.map(m => m.name);
+    
+    // Event listeners
+    easyModeBtn.addEventListener('click', () => startGame('color', data));
+    hardModeBtn.addEventListener('click', () => startGame('bluewhite', data));
+    submitBtn.addEventListener('click', submitGuess);
+    skipBtn.addEventListener('click', skipMap);
+    guessInput.addEventListener('input', handleInput);
+    guessInput.addEventListener('keypress', handleKeyPress);
+    playAgainBtn.addEventListener('click', returnToMenu);
+}
+
+// Start game
+function startGame(mode, data) {
+    gameState.mode = mode;
+    
+    // Filter maps that have blueprints for this mode
+    gameState.maps = data.maps.filter(map => map[mode] && map[mode].length > 0);
+    
+    gameState.remainingMaps = gameState.maps.length;
+    gameState.correctGuesses = 0;
+    gameState.usedMaps = [];
+    gameState.timer = 0;
+    gameState.currentFloorIndex = 0;
+    
+    // Update UI
+    updateScore();
+    
+    // Show game screen
+    showScreen('game');
+    
+    // Start timer
+    startTimer();
+    
+    // Load first map
+    loadRandomMap();
+}
+
+// Show screen
+function showScreen(screen) {
+    menuScreen.classList.remove('active');
+    gameScreen.classList.remove('active');
+    gameoverScreen.classList.remove('active');
+    
+    if (screen === 'menu') {
+        menuScreen.classList.add('active');
+    } else if (screen === 'game') {
+        gameScreen.classList.add('active');
+    } else if (screen === 'gameover') {
+        gameoverScreen.classList.add('active');
+    }
+}
+
+// Load random map
+function loadRandomMap() {
+    const unusedMaps = gameState.maps.filter(m => !gameState.usedMaps.includes(m.name));
+    
+    if (unusedMaps.length === 0) {
+        endGame();
+        return;
+    }
+    
+    const randomMap = unusedMaps[Math.floor(Math.random() * unusedMaps.length)];
+    gameState.currentMap = randomMap;
+    gameState.currentFloorIndex = 0;
+    
+    // Reset input
+    guessInput.value = '';
+    suggestionsDiv.innerHTML = '';
+    suggestionsDiv.classList.remove('active');
+    
+    // Remove feedback classes
+    imageContainer.classList.remove('correct', 'incorrect');
+    
+    // Load image
+    loadMapImage();
+    
+    // Focus input
+    guessInput.focus();
+}
+
+// Load map image
+function loadMapImage() {
+    const floors = gameState.currentMap[gameState.mode];
+    const imagePath = `blueprints/${gameState.mode}/${floors[gameState.currentFloorIndex]}`;
+    
+    mapImage.src = imagePath;
+    currentFloorEl.textContent = gameState.currentFloorIndex + 1;
+    totalFloorsEl.textContent = floors.length;
+    
+    // Handle image load error (show placeholder)
+    mapImage.onerror = function() {
+        this.onerror = null;
+        this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect fill="%230f0f1e" width="800" height="600"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial" font-size="24" fill="%23666" text-anchor="middle" dy=".3em"%3EMap Blueprint%3C/text%3E%3C/svg%3E';
+    };
+}
+
+// Handle input
+function handleInput(e) {
+    const value = e.target.value.toUpperCase().trim();
+    
+    if (value.length > 0) {
+        const filtered = gameState.allMapNames.filter(name => 
+            name.includes(value)
+        );
+        
+        if (filtered.length > 0) {
+            suggestionsDiv.innerHTML = '';
+            filtered.forEach(name => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.textContent = name;
+                div.addEventListener('click', () => selectSuggestion(name));
+                suggestionsDiv.appendChild(div);
+            });
+            suggestionsDiv.classList.add('active');
+        } else {
+            suggestionsDiv.classList.remove('active');
+        }
+    } else {
+        suggestionsDiv.classList.remove('active');
+    }
+    
+    // Enable/disable submit button
+    submitBtn.disabled = value.length === 0;
+}
+
+// Select suggestion
+function selectSuggestion(name) {
+    guessInput.value = name;
+    suggestionsDiv.classList.remove('active');
+    submitGuess();
+}
+
+// Handle key press
+function handleKeyPress(e) {
+    if (e.key === 'Enter' && guessInput.value.trim()) {
+        submitGuess();
+    }
+}
+
+// Submit guess
+function submitGuess() {
+    const guess = guessInput.value.toUpperCase().trim();
+    const answer = gameState.currentMap.name.toUpperCase().trim();
+    
+    if (guess === answer) {
+        // Correct!
+        imageContainer.classList.add('correct');
+        gameState.correctGuesses++;
+        gameState.usedMaps.push(gameState.currentMap.name);
+        gameState.remainingMaps--;
+        
+        updateScore();
+        
+        setTimeout(() => {
+            loadRandomMap();
+        }, 1000);
+    } else {
+        // Incorrect
+        imageContainer.classList.add('incorrect');
+        
+        setTimeout(() => {
+            imageContainer.classList.remove('incorrect');
+            
+            const floors = gameState.currentMap[gameState.mode];
+            if (gameState.currentFloorIndex + 1 < floors.length) {
+                // Show next floor
+                gameState.currentFloorIndex++;
+                loadMapImage();
+                guessInput.value = '';
+                suggestionsDiv.classList.remove('active');
+            } else {
+                // No more floors, reveal answer
+                alert(`The correct answer was: ${gameState.currentMap.name}`);
+                gameState.usedMaps.push(gameState.currentMap.name);
+                gameState.remainingMaps--;
+                updateScore();
+                loadRandomMap();
+            }
+        }, 500);
+    }
+}
+
+// Skip map
+function skipMap() {
+    alert(`Skipped! The answer was: ${gameState.currentMap.name}`);
+    gameState.usedMaps.push(gameState.currentMap.name);
+    gameState.remainingMaps--;
+    updateScore();
+    loadRandomMap();
+}
+
+// Update score
+function updateScore() {
+    mapsRemainingEl.textContent = gameState.remainingMaps;
+    correctGuessesEl.textContent = gameState.correctGuesses;
+}
+
+// Start timer
+function startTimer() {
+    if (gameState.timerInterval) {
+        clearInterval(gameState.timerInterval);
+    }
+    
+    gameState.timerInterval = setInterval(() => {
+        gameState.timer++;
+        updateTimer();
+    }, 1000);
+}
+
+// Stop timer
+function stopTimer() {
+    if (gameState.timerInterval) {
+        clearInterval(gameState.timerInterval);
+        gameState.timerInterval = null;
+    }
+}
+
+// Update timer display
+function updateTimer() {
+    const minutes = Math.floor(gameState.timer / 60);
+    const seconds = gameState.timer % 60;
+    timerEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
+
+// End game
+function endGame() {
+    stopTimer();
+    
+    // Update final stats
+    finalCorrectEl.textContent = gameState.correctGuesses;
+    const minutes = Math.floor(gameState.timer / 60);
+    const seconds = gameState.timer % 60;
+    finalTimeEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    
+    // Show game over screen
+    showScreen('gameover');
+}
+
+// Return to menu
+function returnToMenu() {
+    showScreen('menu');
+}
+
+// Start the game
+init();

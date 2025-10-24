@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainbow Six Siege - Map Guesser</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Menu Screen -->
+    <div id="menu-screen" class="screen active">
+        <div class="menu-container">
+            <div class="logo">
+                <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <h1 class="title">RAINBOW SIX SIEGE</h1>
+                <h2 class="subtitle">Map Guesser</h2>
+            </div>
+            
+            <div class="mode-buttons">
+                <button id="easy-mode-btn" class="mode-btn easy">
+                    <span class="mode-title">EASY MODE</span>
+                    <span class="mode-desc">Colored & Detailed Blueprints</span>
+                </button>
+                
+                <button id="hard-mode-btn" class="mode-btn hard">
+                    <span class="mode-title">HARD MODE</span>
+                    <span class="mode-desc">Blue & White Blueprints</span>
+                </button>
+            </div>
+            
+            <p class="instructions">Guess the map name based on the floor blueprint!</p>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+        <!-- Header -->
+        <div class="game-header">
+            <div class="header-left">
+                <svg class="shield-icon-small" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span class="game-title">R6 MAP GUESSER</span>
+            </div>
+            
+            <div class="header-right">
+                <div class="stat-box">
+                    <div class="stat-value" id="maps-remaining">0</div>
+                    <div class="stat-label">Maps Remaining</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-value correct" id="correct-guesses">0</div>
+                    <div class="stat-label">Correct</div>
+                </div>
+                
+                <div class="timer">
+                    <svg class="clock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span id="timer">0:00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Content -->
+        <div class="game-content">
+            <!-- Image Display -->
+            <div id="image-container" class="image-container">
+                <img id="map-image" src="" alt="Map Blueprint" class="map-image">
+                <div class="floor-indicator">
+                    Floor <span id="current-floor">1</span> of <span id="total-floors">1</span>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="guess-input" 
+                        placeholder="Enter map name..."
+                        autocomplete="off"
+                    >
+                    <div id="suggestions" class="suggestions"></div>
+                </div>
+
+                <div class="button-group">
+                    <button id="submit-btn" class="btn submit-btn">SUBMIT GUESS</button>
+                    <button id="skip-btn" class="btn skip-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="5 4 15 12 5 20 5 4"></polygon>
+                            <line x1="19" y1="5" x2="19" y2="19"></line>
+                        </svg>
+                        SKIP
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="screen">
+        <div class="gameover-container">
+            <svg class="target-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+            <h1 class="gameover-title">MISSION COMPLETE</h1>
+            
+            <div class="final-stats">
+                <div class="final-score">
+                    <div id="final-correct" class="final-number">0</div>
+                    <div class="final-label">Correct Guesses</div>
+                </div>
+                <div class="final-time">
+                    <div id="final-time" class="final-time-value">0:00</div>
+                    <div class="final-time-label">Total Time</div>
+                </div>
+            </div>
+            
+            <button id="play-again-btn" class="btn play-again-btn">PLAY AGAIN</button>
+        </div>
+    </div>
+
+    <script src="scripts/game.js"></script>
+</body>
+</html>
