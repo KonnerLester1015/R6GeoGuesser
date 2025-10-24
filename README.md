@@ -8,7 +8,7 @@ A web based guessing game where players identify **Tom Clancy’s Rainbow Six Si
 
 - **Two Game Modes**
   - **Easy Mode:** Colored and detailed blueprints  
-  - **Hard Mode:** Blue and white simplified blueprints  
+  - **Hard Mode:** Blue and white simplified blueprints
 - **Smart Autocomplete:** Type ahead suggestions for map names  
 - **Multiple Floor Plans:** Wrong guesses show additional floors from the same map  
 - **Score Tracking:** Displays correct guesses and remaining maps  
@@ -49,37 +49,30 @@ Add your blueprint images to the appropriate folders:
 
 **Image Naming Convention:**
 
-Use lowercase names with underscores.  
-Format: `mapname_floornumber.jpg`
-
-**Examples:**
-clubhouse_1.jpg
-bank_2.jpg
-oregon_rework_1.jpg
+Format: `Mapname_floornumber.jpg`
 
 **Supported Maps (31 total some Reworks):**
 
-
-- Clubhouse  
 - Bank / Bank Rework  
-- Kafe  
-- Chalet / Chalet Rework  
 - Border  
-- Stadium Bravo / Stadium Alpha  
-- Lair  
-- Nighthaven Labs  
-- Emerald Plains  
+- Chalet / Chalet Rework  
+- Clubhouse  
 - Coastline  
 - Consulate / Consulate Rework  
+- Emerald Plains  
 - Favela  
 - Fortress  
 - Hereford Base  
 - House  
+- Kafe  
 - Kanal  
+- Lair  
+- Nighthaven Labs  
 - Oregon / Oregon Rework  
 - Outback / Outback Rework  
 - Presidential Plane  
 - Skyscraper / Skyscraper Rework  
+- Stadium Bravo / Stadium Alpha  
 - Theme Park  
 - Tower  
 - Villa  
