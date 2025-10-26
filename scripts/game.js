@@ -9,7 +9,8 @@ let gameState = {
     usedMaps: [],
     timer: 0,
     timerInterval: null,
-    allMapNames: []
+    allMapNames: [],
+    availableFloors: [] // Track which floors haven't been shown yet
 };
 
 // DOM Elements
@@ -32,6 +33,7 @@ const totalFloorsEl = document.getElementById('total-floors');
 const playAgainBtn = document.getElementById('play-again-btn');
 const finalCorrectEl = document.getElementById('final-correct');
 const finalTimeEl = document.getElementById('final-time');
+const backToMenuBtn = document.getElementById('back-to-menu');
 
 // Load maps data
 async function loadMapsData() {
@@ -161,6 +163,12 @@ function loadRandomMap() {
     
     // Remove feedback classes
     imageContainer.classList.remove('correct', 'incorrect');
+    
+    // Remove any existing placeholder
+    const existingPlaceholder = imageContainer.querySelector('.image-placeholder');
+    if (existingPlaceholder) {
+        existingPlaceholder.remove();
+    }
     
     // Load image
     loadMapImage();
