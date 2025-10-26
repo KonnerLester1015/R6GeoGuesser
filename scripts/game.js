@@ -10,7 +10,8 @@ let gameState = {
     timer: 0,
     timerInterval: null,
     allMapNames: [],
-    availableFloors: [] // Track which floors haven't been shown yet
+    availableFloors: [], // Track which floors haven't been shown yet
+    floorsShownCount: 0 // Track how many floors have been shown for current map
 };
 
 // DOM Elements
@@ -88,7 +89,7 @@ function getFallbackData() {
             { name: "FORTRESS", color: ["fortress_1.jpg"], bluewhite: ["fortress_1.jpg"] },
             { name: "HEREFORD BASE", color: ["hereford_1.jpg"], bluewhite: ["hereford_1.jpg"] },
             { name: "HOUSE", color: ["house_1.jpg", "house_2.jpg"], bluewhite: ["house_1.jpg"] },
-            { name: "HOUSE REWORK",color: ["House_1.jpg", "House_2.jpg", "House_3.jpg"], bluewhite: ["House_RW_1.jpg", "House_RW_2.jpg", "House_RW_3.jpg"] },
+            { name: "HOUSE REWORK",color: ["House_1.jpg", "House_2.jpg", "House_3.jpg"], bluewhite: ["House_RW_1.jpg", "House_RW_2.jpg", "House_RW_3.jpg"] },            
             { name: "KANAL", color: ["kanal_1.jpg", "kanal_2.jpg"], bluewhite: ["kanal_1.jpg"] },
             { name: "OREGON", color: ["oregon_1.jpg", "oregon_2.jpg"], bluewhite: ["oregon_1.jpg"] },
             { name: "OREGON REWORK", color: [], bluewhite: ["oregon_rework_1.jpg"] },
@@ -186,9 +187,15 @@ function loadRandomMap() {
     // Create array of floor indices and randomize starting floor
     gameState.availableFloors = floors.map((_, index) => index);
     
+    // Reset floors shown counter for this new map
+    gameState.floorsShownCount = 0;
+    
     // Pick a random starting floor
     const randomIndex = Math.floor(Math.random() * gameState.availableFloors.length);
     gameState.currentFloorIndex = gameState.availableFloors.splice(randomIndex, 1)[0];
+    
+    // Increment floors shown count
+    gameState.floorsShownCount = 1;
     
     // Reset input
     guessInput.value = '';
@@ -222,8 +229,8 @@ function loadMapImage() {
     // Set the image source
     mapImage.src = imagePath;
     
-    // Update floor indicator - show actual floor number (index + 1) and total floors
-    currentFloorEl.textContent = gameState.currentFloorIndex + 1;
+    // Update floor indicator - show how many floors have been revealed vs total
+    currentFloorEl.textContent = gameState.floorsShownCount;
     totalFloorsEl.textContent = floors.length;
     
     // Handle successful load
@@ -350,6 +357,10 @@ function submitGuess() {
                 // Show next random floor from remaining floors
                 const randomIndex = Math.floor(Math.random() * gameState.availableFloors.length);
                 gameState.currentFloorIndex = gameState.availableFloors.splice(randomIndex, 1)[0];
+                
+                // Increment floors shown count
+                gameState.floorsShownCount++;
+                
                 loadMapImage();
                 guessInput.value = '';
                 suggestionsDiv.classList.remove('active');
