@@ -101,6 +101,12 @@ async function init() {
     guessInput.addEventListener('input', handleInput);
     guessInput.addEventListener('keypress', handleKeyPress);
     playAgainBtn.addEventListener('click', returnToMenu);
+    backToMenuBtn.addEventListener('click', () => {
+        if (confirm('Return to menu? Your current progress will be lost.')) {
+            stopTimer();
+            returnToMenu();
+        }
+    });
 }
 
 // Start game
@@ -155,7 +161,16 @@ function loadRandomMap() {
     
     const randomMap = unusedMaps[Math.floor(Math.random() * unusedMaps.length)];
     gameState.currentMap = randomMap;
-    gameState.currentFloorIndex = 0;
+    
+    // Get all available floors for this map
+    const floors = randomMap[gameState.mode];
+    
+    // Create array of floor indices and randomize starting floor
+    gameState.availableFloors = floors.map((_, index) => index);
+    
+    // Pick a random starting floor
+    const randomIndex = Math.floor(Math.random() * gameState.availableFloors.length);
+    gameState.currentFloorIndex = gameState.availableFloors.splice(randomIndex, 1)[0];
     
     // Reset input
     guessInput.value = '';
@@ -301,10 +316,11 @@ function submitGuess() {
         setTimeout(() => {
             imageContainer.classList.remove('incorrect');
             
-            const floors = gameState.currentMap[gameState.mode];
-            if (gameState.currentFloorIndex + 1 < floors.length) {
-                // Show next floor
-                gameState.currentFloorIndex++;
+            // Check if there are more floors to show
+            if (gameState.availableFloors.length > 0) {
+                // Show next random floor from remaining floors
+                const randomIndex = Math.floor(Math.random() * gameState.availableFloors.length);
+                gameState.currentFloorIndex = gameState.availableFloors.splice(randomIndex, 1)[0];
                 loadMapImage();
                 guessInput.value = '';
                 suggestionsDiv.classList.remove('active');
