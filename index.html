@@ -3,10 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rainbow Six Siege - Map Guesser</title>
+    <title>R6 GeoGuessr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="smoke-background"></div>
+
     <!-- Menu Screen -->
     <div id="menu-screen" class="screen active">
         <div class="menu-container">
@@ -14,23 +20,23 @@
                 <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 </svg>
-                <h1 class="title">RAINBOW SIX SIEGE</h1>
-                <h2 class="subtitle">Map Guesser</h2>
+                <h1 class="title">R6 GEOGUESSR</h1>
+                <h2 class="subtitle">TACTICAL MAP RECONNAISSANCE</h2>
             </div>
             
             <div class="mode-buttons">
                 <button id="easy-mode-btn" class="mode-btn easy">
-                    <span class="mode-title">EASY MODE</span>
-                    <span class="mode-desc">Colored & Detailed Blueprints</span>
+                    <span class="mode-title">OPERATION: CASUAL</span>
+                    <span class="mode-desc">COLORED TACTICAL BLUEPRINTS</span>
                 </button>
                 
                 <button id="hard-mode-btn" class="mode-btn hard">
-                    <span class="mode-title">HARD MODE</span>
-                    <span class="mode-desc">Blue & White Blueprints</span>
+                    <span class="mode-title">OPERATION: REALISM</span>
+                    <span class="mode-desc">SIMPLIFIED BLUEPRINT RECON</span>
                 </button>
             </div>
             
-            <p class="instructions">Guess the map name based on the floor blueprint!</p>
+            <p class="instructions">IDENTIFY THE OPERATIONAL MAP FROM FLOOR BLUEPRINTS</p>
         </div>
     </div>
 
@@ -38,22 +44,22 @@
     <div id="game-screen" class="screen">
         <!-- Header -->
         <div class="game-header">
-            <div class="header-left">
+            <div class="header-left" id="back-to-menu" style="cursor: pointer;">
                 <svg class="shield-icon-small" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 </svg>
-                <span class="game-title">R6 MAP GUESSER</span>
+                <span class="game-title">R6 GEOGUESSR</span>
             </div>
             
             <div class="header-right">
                 <div class="stat-box">
                     <div class="stat-value" id="maps-remaining">0</div>
-                    <div class="stat-label">Maps Remaining</div>
+                    <div class="stat-label">MAPS REMAINING</div>
                 </div>
                 
                 <div class="stat-box">
                     <div class="stat-value correct" id="correct-guesses">0</div>
-                    <div class="stat-label">Correct</div>
+                    <div class="stat-label">MISSION SCORE</div>
                 </div>
                 
                 <div class="timer">
@@ -72,7 +78,7 @@
             <div id="image-container" class="image-container">
                 <img id="map-image" src="" alt="Map Blueprint" class="map-image">
                 <div class="floor-indicator">
-                    Floor <span id="current-floor">1</span> of <span id="total-floors">1</span>
+                    LEVEL <span id="current-floor">1</span> / <span id="total-floors">1</span>
                 </div>
             </div>
 
@@ -82,20 +88,20 @@
                     <input 
                         type="text" 
                         id="guess-input" 
-                        placeholder="Enter map name..."
+                        placeholder="ENTER MAP NAME..."
                         autocomplete="off"
                     >
                     <div id="suggestions" class="suggestions"></div>
                 </div>
 
                 <div class="button-group">
-                    <button id="submit-btn" class="btn submit-btn">SUBMIT GUESS</button>
+                    <button id="submit-btn" class="btn submit-btn">DEPLOY ANSWER</button>
                     <button id="skip-btn" class="btn skip-btn">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polygon points="5 4 15 12 5 20 5 4"></polygon>
                             <line x1="19" y1="5" x2="19" y2="19"></line>
                         </svg>
-                        SKIP
+                        EXTRACT
                     </button>
                 </div>
             </div>
@@ -115,15 +121,15 @@
             <div class="final-stats">
                 <div class="final-score">
                     <div id="final-correct" class="final-number">0</div>
-                    <div class="final-label">Correct Guesses</div>
+                    <div class="final-label">SUCCESSFUL IDENTIFICATIONS</div>
                 </div>
                 <div class="final-time">
                     <div id="final-time" class="final-time-value">0:00</div>
-                    <div class="final-time-label">Total Time</div>
+                    <div class="final-time-label">MISSION DURATION</div>
                 </div>
             </div>
             
-            <button id="play-again-btn" class="btn play-again-btn">PLAY AGAIN</button>
+            <button id="play-again-btn" class="btn play-again-btn">RETURN TO BASE</button>
         </div>
     </div>
 
