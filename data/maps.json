@@ -7,7 +7,6 @@
     },
     {
       "name": "BANK REWORK",
-      "color": [],
       "bluewhite": ["Bank_RW_1.jpg", "Bank_RW_2.jpg", "Bank_RW_3.jpg"]
     },
     {
@@ -22,7 +21,6 @@
     },
     {
       "name": "CHALET REWORK",
-      "color": [],
       "bluewhite": ["Chalet_RW_1.jpg", "Chalet_RW_2.jpg", "Chalet_RW_3.jpg"]
     },
     {
@@ -42,13 +40,11 @@
     },
     {
       "name": "CONSULATE REWORK",
-      "color": [],
       "bluewhite": ["Consulate_RW_1.jpg", "Consulate_RW_2.jpg", "Consulate_RW_3.jpg"]
     },
     {
       "name": "EMERALD PLAINS",
-      "color": ["Emerald_1.jpg", "Emerald_2.jpg"],
-      "bluewhite": []
+      "color": ["Emerald_1.jpg", "Emerald_2.jpg"]
     },
     {
       "name": "FAVELA",
@@ -87,8 +83,7 @@
     },
     {
       "name": "LAIR",
-      "color": ["Lair_1.jpg", "Lair_2.jpg"],
-      "bluewhite": []
+      "color": ["Lair_1.jpg", "Lair_2.jpg"]
     },
     {
       "name": "NIGHTHAVEN LABS",
@@ -102,7 +97,6 @@
     },
     {
       "name": "OREGON REWORK",
-      "color": [],
       "bluewhite": ["Oregon_RW_1.jpg", "Oregon_RW_2.jpg", "Oregon_RW_3.jpg"]
     },
     {
@@ -112,7 +106,6 @@
     },
     {
       "name": "OUTBACK REWORK",
-      "color": [],
       "bluewhite": ["Outback_RW_1.jpg", "Outback_RW_2.jpg"]
     },
     {
@@ -127,18 +120,15 @@
     },
     {
       "name": "SKYSCRAPER REWORK",
-      "color": [],
       "bluewhite": ["Skyscraper_RW_1.jpg", "Skyscraper_RW_2.jpg"]
     },
     {
       "name": "STADIUM ALPHA",
-      "color": ["Stadium_alpha_1.jpg", "Stadium_alpha_2.jpg"],
-      "bluewhite": []
+      "color": ["Stadium_alpha_1.jpg", "Stadium_alpha_2.jpg"]
     },
     {
       "name": "STADIUM BRAVO",
-      "color": ["Stadium_bravo_1.jpg", "Stadium_bravo_2.jpg"],
-      "bluewhite": []
+      "color": ["Stadium_bravo_1.jpg", "Stadium_bravo_2.jpg"]
     },
     {
       "name": "THEME PARK",
