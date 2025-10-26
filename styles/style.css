@@ -316,14 +316,18 @@ body {
 
 /* Game Content */
 .game-content {
-    max-width: 1200px;
+    max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
     background: rgba(28, 28, 28, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 4px;
-    padding: 32px;
+    padding: 20px;
     border: 1px solid #d4af37;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .game-content::before {
@@ -336,15 +340,51 @@ body {
     background: linear-gradient(90deg, transparent, #d4af37, transparent);
 }
 
+/* Feedback Message Area */
+.feedback-message {
+    min-height: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #d4af37;
+    opacity: 0;
+    transition: opacity 0.3s ease, padding 0.3s ease;
+    overflow: hidden;
+}
+
+.feedback-message.active {
+    opacity: 1;
+    padding: 12px 20px;
+    min-height: 48px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid #d4af37;
+    border-radius: 4px;
+}
+
+.feedback-message.incorrect {
+    color: #a83232;
+    background: rgba(168, 50, 50, 0.1);
+    border-color: #a83232;
+}
+
+.feedback-message.info {
+    color: #4a9d5f;
+    background: rgba(74, 157, 95, 0.1);
+    border-color: #4a9d5f;
+}
+
 .image-container {
     position: relative;
     background: #0a0a0a;
     border-radius: 4px;
-    margin-bottom: 32px;
     overflow: hidden;
     border: 2px solid #333;
     transition: all 0.3s ease;
-    min-height: 400px;
+    min-height: 300px;
+    max-height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -378,7 +418,7 @@ body {
     width: 100%;
     height: auto;
     display: block;
-    max-height: 600px;
+    max-height: 58vh;
     object-fit: contain;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -386,7 +426,7 @@ body {
 
 .image-placeholder {
     width: 100%;
-    min-height: 400px;
+    min-height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -395,10 +435,10 @@ body {
 
 .floor-indicator {
     position: absolute;
-    bottom: 16px;
-    right: 16px;
+    bottom: 12px;
+    right: 12px;
     background: rgba(0, 0, 0, 0.9);
-    padding: 8px 16px;
+    padding: 6px 12px;
     border-radius: 2px;
     font-size: 11px;
     color: #d4af37;
@@ -412,7 +452,7 @@ body {
 .input-area {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
 }
 
 .input-wrapper {
@@ -425,8 +465,8 @@ body {
     background: #0a0a0a;
     border: 1px solid #555;
     border-radius: 4px;
-    padding: 16px;
-    font-size: 18px;
+    padding: 14px;
+    font-size: 16px;
     color: #e0e0e0;
     text-transform: uppercase;
     font-weight: 700;
@@ -485,8 +525,8 @@ body {
 }
 
 .btn {
-    padding: 16px 32px;
-    font-size: 14px;
+    padding: 14px 28px;
+    font-size: 13px;
     font-weight: 700;
     border: none;
     border-radius: 4px;
@@ -682,19 +722,39 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 1440px) {
+    .game-content {
+        max-width: 95%;
+    }
+}
+
+@media (max-width: 1366px) {
+    .image-container {
+        max-height: 55vh;
+    }
+    
+    .map-image {
+        max-height: 53vh;
+    }
+}
+
 @media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
     .menu-container,
     .gameover-container {
-        padding: 32px 24px;
+        padding: 32px 20px;
     }
 
     .title {
-        font-size: 28px;
-        letter-spacing: 3px;
+        font-size: 24px;
+        letter-spacing: 2px;
     }
 
     .subtitle {
-        font-size: 11px;
+        font-size: 10px;
     }
 
     .mode-title {
@@ -708,16 +768,22 @@ body {
     .game-header {
         flex-direction: column;
         align-items: flex-start;
+        padding: 12px 16px;
     }
 
     .header-right {
         width: 100%;
         justify-content: space-between;
+        gap: 12px;
     }
 
     .stat-box {
         border-left: none;
         padding: 4px 8px;
+    }
+
+    .stat-value {
+        font-size: 22px;
     }
 
     .timer {
@@ -726,15 +792,32 @@ body {
     }
 
     .game-content {
-        padding: 20px;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .image-container {
+        min-height: 250px;
+        max-height: 50vh;
+    }
+
+    .map-image {
+        max-height: 48vh;
     }
 
     .button-group {
         flex-direction: column;
+        gap: 10px;
     }
 
     #guess-input {
-        font-size: 16px;
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 12px;
     }
 
     .gameover-title {
@@ -752,8 +835,16 @@ body {
 }
 
 @media (max-width: 480px) {
+    .title {
+        font-size: 20px;
+    }
+
+    .game-title {
+        font-size: 14px;
+    }
+
     .stat-value {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .stat-label {
@@ -761,11 +852,7 @@ body {
     }
 
     #timer {
-        font-size: 16px;
-    }
-
-    .title {
-        font-size: 24px;
+        font-size: 14px;
     }
 
     .mode-title {
@@ -773,7 +860,54 @@ body {
     }
 
     .btn {
-        font-size: 12px;
-        padding: 14px 24px;
+        font-size: 11px;
+        padding: 10px 20px;
+    }
+
+    .image-container {
+        min-height: 200px;
+        max-height: 45vh;
+    }
+
+    .map-image {
+        max-height: 43vh;
+    }
+
+    .feedback-message {
+        font-size: 11px;
+    }
+
+    .floor-indicator {
+        font-size: 9px;
+        padding: 4px 8px;
+    }
+}
+
+/* Ensure no overflow on small screens */
+@media (max-height: 800px) {
+    .image-container {
+        max-height: 50vh;
+    }
+
+    .map-image {
+        max-height: 48vh;
+    }
+
+    .game-content {
+        padding: 16px;
+    }
+}
+
+@media (max-height: 700px) {
+    .image-container {
+        max-height: 45vh;
+    }
+
+    .map-image {
+        max-height: 43vh;
+    }
+
+    .btn {
+        padding: 10px 20px;
     }
 }

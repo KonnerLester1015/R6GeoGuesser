@@ -34,6 +34,23 @@ const playAgainBtn = document.getElementById('play-again-btn');
 const finalCorrectEl = document.getElementById('final-correct');
 const finalTimeEl = document.getElementById('final-time');
 const backToMenuBtn = document.getElementById('back-to-menu');
+const feedbackMessageEl = document.getElementById('feedback-message');
+
+// Show feedback message
+function showFeedbackMessage(message, type = 'info', duration = 3000) {
+    feedbackMessageEl.textContent = message;
+    feedbackMessageEl.className = 'feedback-message active';
+    if (type) {
+        feedbackMessageEl.classList.add(type);
+    }
+    
+    setTimeout(() => {
+        feedbackMessageEl.classList.remove('active');
+        setTimeout(() => {
+            feedbackMessageEl.className = 'feedback-message';
+        }, 300);
+    }, duration);
+}
 
 // Load maps data
 async function loadMapsData() {
@@ -102,10 +119,11 @@ async function init() {
     guessInput.addEventListener('keypress', handleKeyPress);
     playAgainBtn.addEventListener('click', returnToMenu);
     backToMenuBtn.addEventListener('click', () => {
-        if (confirm('Return to menu? Your current progress will be lost.')) {
+        showFeedbackMessage('RETURNING TO MAIN MENU...', 'info', 2000);
+        setTimeout(() => {
             stopTimer();
             returnToMenu();
-        }
+        }, 2000);
     });
 }
 
@@ -203,6 +221,8 @@ function loadMapImage() {
     
     // Set the image source
     mapImage.src = imagePath;
+    
+    // Update floor indicator - show actual floor number (index + 1) and total floors
     currentFloorEl.textContent = gameState.currentFloorIndex + 1;
     totalFloorsEl.textContent = floors.length;
     
@@ -304,6 +324,8 @@ function submitGuess() {
         gameState.usedMaps.push(gameState.currentMap.name);
         gameState.remainingMaps--;
         
+        showFeedbackMessage('CORRECT IDENTIFICATION — MOVING TO NEXT TARGET', 'info', 1000);
+        
         updateScore();
         
         setTimeout(() => {
@@ -312,6 +334,13 @@ function submitGuess() {
     } else {
         // Incorrect
         imageContainer.classList.add('incorrect');
+        
+        // Check if there are more floors to show
+        if (gameState.availableFloors.length > 0) {
+            showFeedbackMessage('INCORRECT — REVEALING ADDITIONAL INTEL...', 'incorrect', 2000);
+        } else {
+            showFeedbackMessage(`MISSION FAILED — TARGET WAS: ${gameState.currentMap.name}`, 'incorrect', 3000);
+        }
         
         setTimeout(() => {
             imageContainer.classList.remove('incorrect');
@@ -325,12 +354,13 @@ function submitGuess() {
                 guessInput.value = '';
                 suggestionsDiv.classList.remove('active');
             } else {
-                // No more floors, reveal answer
-                alert(`The correct answer was: ${gameState.currentMap.name}`);
+                // No more floors, move to next map
                 gameState.usedMaps.push(gameState.currentMap.name);
                 gameState.remainingMaps--;
                 updateScore();
-                loadRandomMap();
+                setTimeout(() => {
+                    loadRandomMap();
+                }, 3000);
             }
         }, 500);
     }
@@ -338,11 +368,13 @@ function submitGuess() {
 
 // Skip map
 function skipMap() {
-    alert(`Skipped! The answer was: ${gameState.currentMap.name}`);
+    showFeedbackMessage(`EXTRACTION CALLED — TARGET WAS: ${gameState.currentMap.name}`, 'info', 3000);
     gameState.usedMaps.push(gameState.currentMap.name);
     gameState.remainingMaps--;
     updateScore();
-    loadRandomMap();
+    setTimeout(() => {
+        loadRandomMap();
+    }, 3000);
 }
 
 // Update score
