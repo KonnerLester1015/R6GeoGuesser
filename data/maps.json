@@ -71,6 +71,11 @@
       "bluewhite": ["House_1.jpg", "House_2.jpg", "House_3.jpg"]
     },
     {
+      "name": "HOUSE REWORK",
+      "color": ["House_1.jpg", "House_2.jpg", "House_3.jpg"],
+      "bluewhite": ["House_RW_1.jpg", "House_RW_2.jpg", "House_RW_3.jpg"]
+    },
+    {
       "name": "KAFE",
       "color": ["Kafe_1.jpg", "Kafe_2.jpg", "Kafe_3.jpg"],
       "bluewhite": ["Kafe_1.jpg", "Kafe_2.jpg", "Kafe_3.jpg"]

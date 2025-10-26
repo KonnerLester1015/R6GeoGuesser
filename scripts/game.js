@@ -71,6 +71,7 @@ function getFallbackData() {
             { name: "FORTRESS", color: ["fortress_1.jpg"], bluewhite: ["fortress_1.jpg"] },
             { name: "HEREFORD BASE", color: ["hereford_1.jpg"], bluewhite: ["hereford_1.jpg"] },
             { name: "HOUSE", color: ["house_1.jpg", "house_2.jpg"], bluewhite: ["house_1.jpg"] },
+            { name: "HOUSE REWORK",color: ["House_1.jpg", "House_2.jpg", "House_3.jpg"], bluewhite: ["House_RW_1.jpg", "House_RW_2.jpg", "House_RW_3.jpg"] },
             { name: "KANAL", color: ["kanal_1.jpg", "kanal_2.jpg"], bluewhite: ["kanal_1.jpg"] },
             { name: "OREGON", color: ["oregon_1.jpg", "oregon_2.jpg"], bluewhite: ["oregon_1.jpg"] },
             { name: "OREGON REWORK", color: [], bluewhite: ["oregon_rework_1.jpg"] },
