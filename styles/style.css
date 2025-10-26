@@ -13,7 +13,8 @@ body {
     overflow-x: hidden;
 }
 
-/* Animated Smoke Background */
+
+/* Smoke Background */
 .smoke-background {
     position: fixed;
     top: 0;
@@ -22,73 +23,10 @@ body {
     height: 100%;
     z-index: -1;
     pointer-events: none;
-    background: linear-gradient(180deg, #1a1a1a 0%, #141414 100%);
+    background: 
+        linear-gradient(180deg, rgba(26, 26, 26, 0.4) 0%, rgba(20, 20, 20, 0.6) 100%),
+        url('images/background-smoke.jpg') center center / cover no-repeat;
     overflow: hidden;
-}
-
-.smoke-background::before,
-.smoke-background::after {
-    content: '';
-    position: absolute;
-    width: 400%;
-    height: 400%;
-    top: -150%;
-    left: -150%;
-    pointer-events: none;
-}
-
-.smoke-background::before {
-    background: 
-        radial-gradient(ellipse at 30% 40%, rgba(255, 255, 255, 0.03) 0%, transparent 70%),
-        radial-gradient(ellipse at 70% 60%, rgba(255, 255, 255, 0.02) 0%, transparent 65%),
-        radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 60%),
-        radial-gradient(ellipse at 20% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 55%),
-        radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 75%);
-    animation: smokeFloat1 80s ease-in-out infinite;
-    opacity: 0.4;
-    mix-blend-mode: overlay;
-}
-
-.smoke-background::after {
-    background: 
-        radial-gradient(ellipse at 60% 30%, rgba(255, 255, 255, 0.02) 0%, transparent 70%),
-        radial-gradient(ellipse at 40% 70%, rgba(255, 255, 255, 0.03) 0%, transparent 65%),
-        radial-gradient(ellipse at 20% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 60%),
-        radial-gradient(ellipse at 90% 90%, rgba(255, 255, 255, 0.03) 0%, transparent 75%),
-        radial-gradient(ellipse at 10% 90%, rgba(255, 255, 255, 0.02) 0%, transparent 65%);
-    animation: smokeFloat2 100s ease-in-out infinite reverse;
-    opacity: 0.3;
-    mix-blend-mode: overlay;
-}
-
-@keyframes smokeFloat1 {
-    0%, 100% {
-        transform: translate(0%, 0%) rotate(0deg) scale(1);
-    }
-    25% {
-        transform: translate(-3%, 2%) rotate(1deg) scale(1.02);
-    }
-    50% {
-        transform: translate(-5%, -3%) rotate(-1deg) scale(1.03);
-    }
-    75% {
-        transform: translate(2%, -2%) rotate(0.5deg) scale(1.01);
-    }
-}
-
-@keyframes smokeFloat2 {
-    0%, 100% {
-        transform: translate(0%, 0%) rotate(0deg) scale(1);
-    }
-    25% {
-        transform: translate(4%, -2%) rotate(-1deg) scale(1.02);
-    }
-    50% {
-        transform: translate(6%, 4%) rotate(1deg) scale(1.04);
-    }
-    75% {
-        transform: translate(-3%, 3%) rotate(-0.5deg) scale(1.01);
-    }
 }
 
 /* Screen Management */
