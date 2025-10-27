@@ -1,17 +1,18 @@
 // Game State
 let gameState = {
-    mode: null,
+    mode: null, // 'standard' or 'rotated'
     maps: [],
     currentMap: null,
     currentFloorIndex: 0,
+    currentRotation: 0, // 0, 90, 180, or 270 degrees
     correctGuesses: 0,
     remainingMaps: 0,
     usedMaps: [],
     timer: 0,
     timerInterval: null,
     allMapNames: [],
-    availableFloors: [], // Track which floors haven't been shown yet
-    floorsShownCount: 0 // Track how many floors have been shown for current map
+    availableFloors: [],
+    floorsShownCount: 0
 };
 
 // DOM Elements
@@ -89,7 +90,6 @@ function getFallbackData() {
             { name: "FORTRESS", color: ["fortress_1.jpg"], bluewhite: ["fortress_1.jpg"] },
             { name: "HEREFORD BASE", color: ["hereford_1.jpg"], bluewhite: ["hereford_1.jpg"] },
             { name: "HOUSE", color: ["house_1.jpg", "house_2.jpg"], bluewhite: ["house_1.jpg"] },
-            { name: "HOUSE REWORK",color: ["House_1.jpg", "House_2.jpg", "House_3.jpg"], bluewhite: ["House_RW_1.jpg", "House_RW_2.jpg", "House_RW_3.jpg"] },            
             { name: "KANAL", color: ["kanal_1.jpg", "kanal_2.jpg"], bluewhite: ["kanal_1.jpg"] },
             { name: "OREGON", color: ["oregon_1.jpg", "oregon_2.jpg"], bluewhite: ["oregon_1.jpg"] },
             { name: "OREGON REWORK", color: [], bluewhite: ["oregon_rework_1.jpg"] },
@@ -112,8 +112,8 @@ async function init() {
     gameState.allMapNames = data.maps.map(m => m.name);
     
     // Event listeners
-    easyModeBtn.addEventListener('click', () => startGame('color', data));
-    hardModeBtn.addEventListener('click', () => startGame('bluewhite', data));
+    easyModeBtn.addEventListener('click', () => startGame('standard', data));
+    hardModeBtn.addEventListener('click', () => startGame('rotated', data));
     submitBtn.addEventListener('click', submitGuess);
     skipBtn.addEventListener('click', skipMap);
     guessInput.addEventListener('input', handleInput);
@@ -132,14 +132,15 @@ async function init() {
 function startGame(mode, data) {
     gameState.mode = mode;
     
-    // Filter maps that have blueprints for this mode
-    gameState.maps = data.maps.filter(map => map[mode] && map[mode].length > 0);
+    // All maps use bluewhite blueprints
+    gameState.maps = data.maps.filter(map => map.bluewhite && map.bluewhite.length > 0);
     
     gameState.remainingMaps = gameState.maps.length;
     gameState.correctGuesses = 0;
     gameState.usedMaps = [];
     gameState.timer = 0;
     gameState.currentFloorIndex = 0;
+    gameState.currentRotation = 0;
     
     // Update UI
     updateScore();
@@ -181,8 +182,8 @@ function loadRandomMap() {
     const randomMap = unusedMaps[Math.floor(Math.random() * unusedMaps.length)];
     gameState.currentMap = randomMap;
     
-    // Get all available floors for this map
-    const floors = randomMap[gameState.mode];
+    // Get all available floors for this map (always bluewhite)
+    const floors = randomMap.bluewhite;
     
     // Create array of floor indices and randomize starting floor
     gameState.availableFloors = floors.map((_, index) => index);
@@ -196,6 +197,16 @@ function loadRandomMap() {
     
     // Increment floors shown count
     gameState.floorsShownCount = 1;
+    
+    // Set rotation based on mode
+    if (gameState.mode === 'rotated') {
+        // Random rotation: 0, 90, 180, or 270 degrees
+        const rotations = [0, 90, 180, 270];
+        gameState.currentRotation = rotations[Math.floor(Math.random() * rotations.length)];
+    } else {
+        // Standard mode: no rotation
+        gameState.currentRotation = 0;
+    }
     
     // Reset input
     guessInput.value = '';
@@ -220,11 +231,14 @@ function loadRandomMap() {
 
 // Load map image
 function loadMapImage() {
-    const floors = gameState.currentMap[gameState.mode];
-    const imagePath = `blueprints/${gameState.mode}/${floors[gameState.currentFloorIndex]}`;
+    const floors = gameState.currentMap.bluewhite;
+    const imagePath = `blueprints/bluewhite/${floors[gameState.currentFloorIndex]}`;
     
     // Show the image container
     mapImage.style.display = 'block';
+    
+    // Apply rotation based on game mode
+    mapImage.style.transform = `rotate(${gameState.currentRotation}deg)`;
     
     // Set the image source
     mapImage.src = imagePath;
@@ -256,12 +270,12 @@ function showPlaceholder() {
         <div style="text-align: center; color: #666; padding: 60px 20px;">
             <div style="font-size: 80px; margin-bottom: 20px;">🗺️</div>
             <div style="font-size: 24px; margin-bottom: 10px;">Map Blueprint</div>
-            <div style="font-size: 14px; margin-bottom: 20px;">Floor ${gameState.currentFloorIndex + 1} of ${gameState.currentMap[gameState.mode].length}</div>
+            <div style="font-size: 14px; margin-bottom: 20px;">Floor ${gameState.currentFloorIndex + 1} of ${gameState.currentMap.bluewhite.length}</div>
             <div style="font-size: 12px; color: #444; margin-top: 20px;">
-                Mode: ${gameState.mode === 'color' ? 'Colored Blueprint' : 'Blue & White Blueprint'}
+                Mode: ${gameState.mode === 'standard' ? 'Standard Orientation' : 'Rotated ' + gameState.currentRotation + '°'}
             </div>
             <div style="font-size: 11px; color: #333; margin-top: 10px; font-family: monospace;">
-                Expected: blueprints/${gameState.mode}/${gameState.currentMap[gameState.mode][gameState.currentFloorIndex]}
+                Expected: blueprints/bluewhite/${gameState.currentMap.bluewhite[gameState.currentFloorIndex]}
             </div>
         </div>
     `;
@@ -358,12 +372,19 @@ function submitGuess() {
                 const randomIndex = Math.floor(Math.random() * gameState.availableFloors.length);
                 gameState.currentFloorIndex = gameState.availableFloors.splice(randomIndex, 1)[0];
                 
+                // Randomize rotation again for rotated mode
+                if (gameState.mode === 'rotated') {
+                    const rotations = [0, 90, 180, 270];
+                    gameState.currentRotation = rotations[Math.floor(Math.random() * rotations.length)];
+                }
+                
                 // Increment floors shown count
                 gameState.floorsShownCount++;
                 
                 loadMapImage();
                 guessInput.value = '';
                 suggestionsDiv.classList.remove('active');
+            } else {gestionsDiv.classList.remove('active');
             } else {
                 // No more floors, move to next map
                 gameState.usedMaps.push(gameState.currentMap.name);

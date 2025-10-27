@@ -2,7 +2,6 @@
   "maps": [
     {
       "name": "BANK",
-      "color": ["Bank_1.jpg", "Bank_2.jpg", "Bank_3.jpg"],
       "bluewhite": ["Bank_1.jpg", "Bank_2.jpg", "Bank_3.jpg"]
     },
     {
@@ -11,12 +10,10 @@
     },
     {
       "name": "BORDER",
-      "color": ["Border_1.jpg", "Border_2.jpg", "Border_3.jpg"],
       "bluewhite": ["Border_1.jpg", "Border_2.jpg"]
     },
     {
       "name": "CHALET",
-      "color": ["Chalet_1.jpg", "Chalet_2.jpg", "Chalet_3.jpg"],
       "bluewhite": ["Chalet_1.jpg", "Chalet_2.jpg", "Chalet_3.jpg"]
     },
     {
@@ -25,17 +22,14 @@
     },
     {
       "name": "CLUBHOUSE",
-      "color": ["Clubhouse_1.jpg", "Clubhouse_2.jpg", "Clubhouse_3.jpg"],
       "bluewhite": ["Clubhouse_1.jpg", "Clubhouse_2.jpg", "Clubhouse_3.jpg"]
     },
     {
       "name": "COASTLINE",
-      "color": ["Coastline_1.jpg", "Coastline_2.jpg", "Coastline_3.jpg"],
       "bluewhite": ["Coastline_1.jpg", "Coastline_2.jpg"]
     },
     {
       "name": "CONSULATE",
-      "color": ["Consulate_1.jpg", "Consulate_2.jpg", "Consulate_3.jpg"],
       "bluewhite": ["Consulate_1.jpg", "Consulate_2.jpg", "Consulate_3.jpg"]
     },
     {
@@ -43,56 +37,42 @@
       "bluewhite": ["Consulate_RW_1.jpg", "Consulate_RW_2.jpg", "Consulate_RW_3.jpg"]
     },
     {
-      "name": "EMERALD PLAINS",
-      "color": ["Emerald_1.jpg", "Emerald_2.jpg"]
+      "name": "EMERALD PLAINS"
     },
     {
       "name": "FAVELA",
-      "color": ["Favela_1.jpg", "Favela_2.jpg", "Favela_3.jpg"],
       "bluewhite": ["Favela_1.jpg", "Favela_2.jpg", "Favela_3.jpg"]
     },
     {
       "name": "FORTRESS",
-      "color": ["Fortress_1.jpg", "Fortress_2.jpg"],
       "bluewhite": ["Fortress_1.jpg", "Fortress_2.jpg"]
     },
     {
       "name": "HEREFORD BASE",
-      "color": ["Hereford_1.jpg", "Hereford_2.jpg"],
       "bluewhite": ["Hereford_1.jpg", "Hereford_2.jpg", "Hereford_3.jpg", "Hereford_4.jpg"]
     },
     {
       "name": "HOUSE",
-      "color": ["House_1.jpg", "House_2.jpg", "House_3.jpg"],
       "bluewhite": ["House_1.jpg", "House_2.jpg", "House_3.jpg"]
     },
     {
       "name": "HOUSE REWORK",
-      "color": ["House_1.jpg", "House_2.jpg", "House_3.jpg"],
       "bluewhite": ["House_RW_1.jpg", "House_RW_2.jpg", "House_RW_3.jpg"]
     },
     {
       "name": "KAFE",
-      "color": ["Kafe_1.jpg", "Kafe_2.jpg", "Kafe_3.jpg"],
       "bluewhite": ["Kafe_1.jpg", "Kafe_2.jpg", "Kafe_3.jpg"]
     },
     {
       "name": "KANAL",
-      "color": ["Kanal_1.jpg", "Kanal_2.jpg", "Kanal_3.jpg"],
       "bluewhite": ["Kanal_1.jpg", "Kanal_2.jpg", "Kanal_3.jpg"]
     },
     {
-      "name": "LAIR",
-      "color": ["Lair_1.jpg", "Lair_2.jpg"]
-    },
-    {
       "name": "NIGHTHAVEN LABS",
-      "color": ["Nighthaven_1.jpg", "Nighthaven_2.jpg"],
       "bluewhite": ["Nighthaven_1.jpg", "Nighthaven_2.jpg", "Nighthaven_3.jpg"]
     },
     {
       "name": "OREGON",
-      "color": ["Oregon_1.jpg", "Oregon_2.jpg", "Oregon_3.jpg"],
       "bluewhite": ["Oregon_1.jpg", "Oregon_2.jpg", "Oregon_3.jpg"]
     },
     {
@@ -101,7 +81,6 @@
     },
     {
       "name": "OUTBACK",
-      "color": ["Outback_1.jpg", "Outback_2.jpg"],
       "bluewhite": ["Outback_1.jpg", "Outback_2.jpg"]
     },
     {
@@ -110,12 +89,10 @@
     },
     {
       "name": "PRESIDENTIAL PLANE",
-      "color": ["Plane_1.jpg", "Plane_2.jpg"],
       "bluewhite": ["Plane_1.jpg", "Plane_2.jpg", "Plane_3.jpg"]
     },
     {
       "name": "SKYSCRAPER",
-      "color": ["Skyscraper_1.jpg", "Skyscraper_2.jpg"],
       "bluewhite": ["Skyscraper_1.jpg", "Skyscraper_2.jpg"]
     },
     {
@@ -123,31 +100,19 @@
       "bluewhite": ["Skyscraper_RW_1.jpg", "Skyscraper_RW_2.jpg"]
     },
     {
-      "name": "STADIUM ALPHA",
-      "color": ["Stadium_alpha_1.jpg", "Stadium_alpha_2.jpg"]
-    },
-    {
-      "name": "STADIUM BRAVO",
-      "color": ["Stadium_bravo_1.jpg", "Stadium_bravo_2.jpg"]
-    },
-    {
       "name": "THEME PARK",
-      "color": ["Themepark_1.jpg", "Themepark_2.jpg", "Themepark_3.jpg"],
       "bluewhite": ["Themepark_1.jpg", "Themepark_2.jpg"]
     },
     {
       "name": "TOWER",
-      "color": ["Tower_1.jpg", "Tower_2.jpg"],
       "bluewhite": ["Tower_1.jpg", "Tower_2.jpg"]
     },
     {
       "name": "VILLA",
-      "color": ["Villa_1.jpg", "Villa_2.jpg", "Villa_3.jpg"],
       "bluewhite": ["Villa_1.jpg", "Villa_2.jpg", "Villa_3.jpg"]
     },
     {
       "name": "YACHT",
-      "color": ["Yacht_1.jpg", "Yacht_2.jpg"],
       "bluewhite": ["Yacht_1.jpg", "Yacht_2.jpg", "Yacht_3.jpg"]
     }
   ]
