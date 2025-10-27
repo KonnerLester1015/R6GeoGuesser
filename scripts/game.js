@@ -54,19 +54,16 @@ function showFeedbackMessage(message, type = 'info', duration = 3000) {
     }, duration);
 }
 
-// Load maps data
-async function loadMapsData() {
-    try {
-        const response = await fetch('data/maps.json');
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error loading maps data:', error);
-        // Fallback data if JSON fails to load
-        return getFallbackData();
-    }
+// Skip map
+function skipMap() {
+    showFeedbackMessage(`EXTRACTION CALLED — TARGET WAS: ${gameState.currentMap.name}`, 'info', 3000);
+    gameState.usedMaps.push(gameState.currentMap.name);
+    gameState.remainingMaps--;
+    updateScore();
+    setTimeout(() => {
+        loadRandomMap();
+    }, 3000);
 }
-
 // Fallback data
 function getFallbackData() {
     return {
@@ -384,7 +381,6 @@ function submitGuess() {
                 loadMapImage();
                 guessInput.value = '';
                 suggestionsDiv.classList.remove('active');
-            } else {gestionsDiv.classList.remove('active');
             } else {
                 // No more floors, move to next map
                 gameState.usedMaps.push(gameState.currentMap.name);
