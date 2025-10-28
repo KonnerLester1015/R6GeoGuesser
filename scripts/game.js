@@ -5,6 +5,7 @@ let gameState = {
     currentMap: null,
     currentFloorIndex: 0,
     correctGuesses: 0,
+    incorrectGuesses: 0,
     remainingMaps: 0,
     usedMaps: [],
     timer: 0,
@@ -29,6 +30,7 @@ const mapImage = document.getElementById('map-image');
 const imageContainer = document.getElementById('image-container');
 const mapsRemainingEl = document.getElementById('maps-remaining');
 const correctGuessesEl = document.getElementById('correct-guesses');
+const incorrectGuessesEl = document.getElementById('incorrect-guesses');
 const timerEl = document.getElementById('timer');
 const currentFloorEl = document.getElementById('current-floor');
 const totalFloorsEl = document.getElementById('total-floors');
@@ -140,6 +142,7 @@ function startGame(mode, data, isHardMode) {
     
     gameState.remainingMaps = gameState.maps.length;
     gameState.correctGuesses = 0;
+    gameState.incorrectGuesses = 0;
     gameState.usedMaps = [];
     gameState.timer = 0;
     gameState.currentFloorIndex = 0;
@@ -382,6 +385,7 @@ function submitGuess() {
                 // No more floors, move to next map
                 gameState.usedMaps.push(gameState.currentMap.name);
                 gameState.remainingMaps--;
+                gameState.incorrectGuesses++;
                 updateScore();
                 setTimeout(() => {
                     loadRandomMap();
@@ -406,6 +410,7 @@ function skipMap() {
 function updateScore() {
     mapsRemainingEl.textContent = gameState.remainingMaps;
     correctGuessesEl.textContent = gameState.correctGuesses;
+    incorrectGuessesEl.textContent = gameState.incorrectGuesses;
 }
 
 // Start timer

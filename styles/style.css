@@ -339,6 +339,11 @@ body {
     text-shadow: 0 0 10px rgba(74, 157, 95, 0.5);
 }
 
+.stat-value.incorrect {
+    color: #a83232;
+    text-shadow: 0 0 10px rgba(168, 50, 50, 0.5);
+}
+
 .stat-label {
     font-size: 9px;
     color: #666;
@@ -443,6 +448,7 @@ body {
     align-items: center;
     justify-content: center;
     box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+    padding: 20px;
 }
 
 .image-container.correct {
@@ -470,12 +476,12 @@ body {
 
 .map-image {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     max-height: 58vh;
     object-fit: contain;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.5s ease;
 }
 
 .image-placeholder {
