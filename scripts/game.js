@@ -116,6 +116,7 @@ async function init() {
     easyModeBtn.addEventListener('click', () => startGame('bluewhite', data, false));
     hardModeBtn.addEventListener('click', () => startGame('bluewhite', data, true));
     submitBtn.addEventListener('click', submitGuess);
+    document.getElementById('intel-btn').addEventListener('click', showNextFloor);
     skipBtn.addEventListener('click', skipMap);
     guessInput.addEventListener('input', handleInput);
     guessInput.addEventListener('keypress', handleKeyPress);

@@ -208,18 +208,6 @@ body {
     transform: translateY(-2px);
 }
 
-.mode-btn.hard:hover {
-    animation: rotateHint 2s ease infinite;
-}
-
-@keyframes rotateHint {
-    0% { transform: translateY(-2px) rotate(0deg); }
-    25% { transform: translateY(-2px) rotate(90deg); }
-    50% { transform: translateY(-2px) rotate(180deg); }
-    75% { transform: translateY(-2px) rotate(270deg); }
-    100% { transform: translateY(-2px) rotate(360deg); }
-}
-
 .mode-btn.easy::after {
     content: '';
     position: absolute;
