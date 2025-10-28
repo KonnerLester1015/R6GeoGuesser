@@ -454,5 +454,34 @@ function returnToMenu() {
     showScreen('menu');
 }
 
+// Show next floor (Intel button)
+function showNextFloor() {
+    // Check if there are more floors available
+    if (gameState.availableFloors.length > 0) {
+        // Show feedback
+        showFeedbackMessage('ADDITIONAL INTEL ACQUIRED — DISPLAYING NEXT FLOOR PLAN', 'info', 2000);
+        
+        // Pick a random floor from remaining floors
+        const randomIndex = Math.floor(Math.random() * gameState.availableFloors.length);
+        gameState.currentFloorIndex = gameState.availableFloors.splice(randomIndex, 1)[0];
+        
+        // Increment floors shown count
+        gameState.floorsShownCount++;
+        
+        // Load the new floor image
+        loadMapImage();
+        
+        // Clear input and suggestions
+        guessInput.value = '';
+        suggestionsDiv.classList.remove('active');
+        
+        // Remove any feedback classes from image container
+        imageContainer.classList.remove('correct', 'incorrect');
+    } else {
+        // No more floors available
+        showFeedbackMessage('NO ADDITIONAL INTEL AVAILABLE FOR THIS MAP', 'info', 2000);
+    }
+}
+
 // Start the game
 init();
