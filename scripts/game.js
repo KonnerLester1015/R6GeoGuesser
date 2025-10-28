@@ -11,7 +11,8 @@ let gameState = {
     timerInterval: null,
     allMapNames: [],
     availableFloors: [], // Track which floors haven't been shown yet
-    floorsShownCount: 0 // Track how many floors have been shown for current map
+    floorsShownCount: 0, // Track how many floors have been shown for current map
+    currentRotation: 0 // Track current rotation for hard mode
 };
 
 // DOM Elements
@@ -112,8 +113,8 @@ async function init() {
     gameState.allMapNames = data.maps.map(m => m.name);
     
     // Event listeners
-    easyModeBtn.addEventListener('click', () => startGame('color', data));
-    hardModeBtn.addEventListener('click', () => startGame('bluewhite', data));
+    easyModeBtn.addEventListener('click', () => startGame('bluewhite', data, false));
+    hardModeBtn.addEventListener('click', () => startGame('bluewhite', data, true));
     submitBtn.addEventListener('click', submitGuess);
     skipBtn.addEventListener('click', skipMap);
     guessInput.addEventListener('input', handleInput);
@@ -129,8 +130,9 @@ async function init() {
 }
 
 // Start game
-function startGame(mode, data) {
+function startGame(mode, data, isHardMode) {
     gameState.mode = mode;
+    gameState.isHardMode = isHardMode;
     
     // Filter maps that have blueprints for this mode
     gameState.maps = data.maps.filter(map => map[mode] && map[mode].length > 0);
@@ -140,6 +142,7 @@ function startGame(mode, data) {
     gameState.usedMaps = [];
     gameState.timer = 0;
     gameState.currentFloorIndex = 0;
+    gameState.currentRotation = 0;
     
     // Update UI
     updateScore();
@@ -228,6 +231,16 @@ function loadMapImage() {
     
     // Set the image source
     mapImage.src = imagePath;
+    
+    // If in hard mode, apply random rotation
+    if (gameState.isHardMode) {
+        const rotations = [0, 90, 180, 270];
+        gameState.currentRotation = rotations[Math.floor(Math.random() * rotations.length)];
+        mapImage.style.transform = `rotate(${gameState.currentRotation}deg)`;
+        mapImage.style.transition = 'transform 0.5s ease';
+    } else {
+        mapImage.style.transform = 'rotate(0deg)';
+    }
     
     // Update floor indicator - show how many floors have been revealed vs total
     currentFloorEl.textContent = gameState.floorsShownCount;
