@@ -550,7 +550,7 @@ body {
     border: 1px solid #d4af37;
     border-top: none;
     border-radius: 0 0 4px 4px;
-    max-height: 240px;
+    max-height: min(240px, calc(100vh - 200px));
     overflow-y: auto;
     z-index: 10;
     display: none;
