@@ -341,7 +341,8 @@ function handleInput(e) {
 function selectSuggestion(name) {
     guessInput.value = name;
     suggestionsDiv.classList.remove('active');
-    submitGuess();
+    submitBtn.disabled = false;
+    guessInput.focus(); // Keep focus on input for better UX
 }
 
 // Handle key press

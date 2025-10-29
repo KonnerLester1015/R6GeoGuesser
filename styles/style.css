@@ -373,7 +373,6 @@ body {
     letter-spacing: 1px;
 }
 
-/* Game Content */
 .game-content {
     max-width: 1400px;
     width: 100%;
@@ -382,6 +381,7 @@ body {
     backdrop-filter: blur(10px);
     border-radius: 4px;
     padding: 20px;
+    padding-bottom: 80px;
     border: 1px solid #d4af37;
     position: relative;
     display: flex;
@@ -550,10 +550,11 @@ body {
     border: 1px solid #d4af37;
     border-top: none;
     border-radius: 0 0 4px 4px;
-    max-height: min(240px, calc(100vh - 200px));
+    max-height: 200px;
     overflow-y: auto;
     z-index: 10;
     display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add shadow for better visibility */
 }
 
 .suggestions.active {
