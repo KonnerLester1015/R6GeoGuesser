@@ -867,6 +867,22 @@ body {
     transition: transform 0.3s ease;
 }
 
+.footer-separator {
+    color: #333;
+    font-weight: 400;
+    padding: 0 4px;
+}
+
+.github-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.footer-link:hover .github-icon {
+    transform: scale(1.1);
+}
+
 /* Responsive Design */
 @media (max-width: 1440px) {
     .game-content {
