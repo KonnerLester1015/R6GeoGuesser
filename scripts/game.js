@@ -121,6 +121,7 @@ async function init() {
     document.getElementById('intel-btn').addEventListener('click', showNextFloor);
     skipBtn.addEventListener('click', skipMap);
     guessInput.addEventListener('input', handleInput);
+    guessInput.addEventListener('focus', handleInput);
     guessInput.addEventListener('keypress', handleKeyPress);
     playAgainBtn.addEventListener('click', returnToMenu);
     backToMenuBtn.addEventListener('click', () => {
@@ -129,6 +130,13 @@ async function init() {
             stopTimer();
             returnToMenu();
         }, 2000);
+    });
+    
+    // Close suggestions when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!guessInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
+            suggestionsDiv.classList.remove('active');
+        }
     });
 }
 
@@ -296,24 +304,20 @@ function showPlaceholder() {
 function handleInput(e) {
     const value = e.target.value.toUpperCase().trim();
     
-    if (value.length > 0) {
-        const filtered = gameState.allMapNames.filter(name => 
-            name.includes(value)
-        );
-        
-        if (filtered.length > 0) {
-            suggestionsDiv.innerHTML = '';
-            filtered.forEach(name => {
-                const div = document.createElement('div');
-                div.className = 'suggestion-item';
-                div.textContent = name;
-                div.addEventListener('click', () => selectSuggestion(name));
-                suggestionsDiv.appendChild(div);
-            });
-            suggestionsDiv.classList.add('active');
-        } else {
-            suggestionsDiv.classList.remove('active');
-        }
+    const filtered = value.length > 0 
+        ? gameState.allMapNames.filter(name => name.includes(value))
+        : gameState.allMapNames;
+    
+    if (filtered.length > 0) {
+        suggestionsDiv.innerHTML = '';
+        filtered.forEach(name => {
+            const div = document.createElement('div');
+            div.className = 'suggestion-item';
+            div.textContent = name;
+            div.addEventListener('click', () => selectSuggestion(name));
+            suggestionsDiv.appendChild(div);
+        });
+        suggestionsDiv.classList.add('active');
     } else {
         suggestionsDiv.classList.remove('active');
     }
