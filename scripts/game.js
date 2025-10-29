@@ -76,7 +76,7 @@ function getFallbackData() {
             { name: "CLUBHOUSE", color: ["clubhouse_1.jpg", "clubhouse_2.jpg"], bluewhite: ["clubhouse_1.jpg", "clubhouse_2.jpg"] },
             { name: "BANK", color: ["bank_1.jpg", "bank_2.jpg"], bluewhite: ["bank_1.jpg", "bank_2.jpg"] },
             { name: "BANK REWORK", color: [], bluewhite: ["bank_rework_1.jpg"] },
-            { name: "KAFE", color: ["kafe_1.jpg", "kafe_2.jpg"], bluewhite: ["kafe_1.jpg", "kafe_2.jpg"] },
+            { name: "KAFE DOSTOYEVSKY", color: ["kafe_1.jpg", "kafe_2.jpg"], bluewhite: ["kafe_1.jpg", "kafe_2.jpg"] },
             { name: "CHALET", color: ["chalet_1.jpg", "chalet_2.jpg"], bluewhite: ["chalet_1.jpg", "chalet_2.jpg"] },
             { name: "CHALET REWORK", color: [], bluewhite: ["chalet_rework_1.jpg"] },
             { name: "BORDER", color: ["border_1.jpg", "border_2.jpg"], bluewhite: ["border_1.jpg", "border_2.jpg"] },
