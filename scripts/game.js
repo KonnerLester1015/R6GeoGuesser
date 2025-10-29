@@ -250,8 +250,19 @@ function loadMapImage() {
         gameState.currentRotation = rotations[Math.floor(Math.random() * rotations.length)];
         mapImage.style.transform = `rotate(${gameState.currentRotation}deg)`;
         mapImage.style.transition = 'transform 0.5s ease';
+        
+        // Adjust image dimensions for 90/270 degree rotations
+        if (gameState.currentRotation === 90 || gameState.currentRotation === 270) {
+            mapImage.style.maxWidth = '58vh';
+            mapImage.style.maxHeight = '100%';
+        } else {
+            mapImage.style.maxWidth = '100%';
+            mapImage.style.maxHeight = '58vh';
+        }
     } else {
         mapImage.style.transform = 'rotate(0deg)';
+        mapImage.style.maxWidth = '100%';
+        mapImage.style.maxHeight = '58vh';
     }
     
     // Update floor indicator - show how many floors have been revealed vs total
